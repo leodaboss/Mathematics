@@ -44,12 +44,12 @@ def generalised_bisection(bottom, top, tol,func,mid,midfunc):
 def main():
     a=1/2
     b=3
-    tol=0.00001
+    tol=0.001
     c=bisection(a,b,tol,math.cos)
     print(2*c)
     print()
-    #d=secant_bisection(a,b,tol,math.cos)
-    #print(2*d)
+    d=secant_bisection(a,b,tol,math.cos)
+    print(2*d)
     
 main()
 #from this python experiment we can observe that the secant method is much more
