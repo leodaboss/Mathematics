@@ -41,16 +41,29 @@ def generalised_bisection(bottom, top, tol,func,mid,midfunc):
     return [midpoint, counter]
 
 #here is test code
-def main():
-    a=1/2
-    b=3
-    tol=0.001
-    c=bisection(a,b,tol,math.cos)
-    print(2*c)
-    print()
-    d=secant_bisection(a,b,tol,math.cos)
-    print(2*d)
     
+def get_pi_1(tol):
+    top=4
+    bottom=0
+    #unique solution of cos(x)=0 between 4 and 0 is pi/2
+    return 2*bisection(bottom,top,tol,math.cos)
+
+def get_pi_2(tol):
+    top=4
+    bottom=2
+    #unique solution of sin(x)=0 between 2 and 4 is pi
+    return bisection(bottom,top,tol,math.sin)
+
+def main():
+    tol=0.001
+    a,b=0,4
+    c=get_pi_1(tol)
+    d=get_pi_2(tol)
+    e=secant_bisection(a,b,tol,math.cos)
+    print(c)
+    print(d)
+    print(2*e)
+
 main()
 #from this python experiment we can observe that the secant method is much more
 #precise and it achieves convergence in fewer steps
