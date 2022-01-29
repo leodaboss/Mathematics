@@ -24,20 +24,24 @@ def generalised_bisection(bottom, top, tol,func,mid,midfunc):
     counter=0
     #loop repeats until bottom and top are close enough together
     while top-bottom>=tol:
-        #works out midpoint
+        #initialises new values
         midpoint=mid(top,bottom,midfunc)
-        value=func(midpoint)
-        
-        #adds 1 to number of steps
+        midpoint_value=func(midpoint)
+        bottom_value=func(bottom)
         counter+=1
-
-        #in case we somehow manage to get right answer
+        
+        #exceptional break if we get the right answer and are done
         if func(midpoint)==0:break
+        
+        #showing computation if wanted
+        #print('['+str(bottom)+' : '+str(midpoint)+' : '+str(top)+']')
+        #print('bottom has value:'+str(bottom_value))
+        #print('midpoint has value:'+str(midpoint_value))
 
         #general algorithm
-        if value*func(bottom)<0:top=midpoint
+        if midpoint_value*bottom_value<0:top=midpoint
         else: bottom=midpoint
-        print(str(bottom)+':'+str(top))
+        
     return [midpoint, counter]
 
 #here is test code
@@ -58,11 +62,11 @@ def main():
     tol=0.001
     a,b=0,4
     c=get_pi_1(tol)
-    d=get_pi_2(tol)
-    e=secant_bisection(a,b,tol,math.cos)
+    #d=get_pi_2(tol)
+    #e=secant_bisection(a,b,tol,math.cos)
     print(c)
-    print(d)
-    print(2*e)
+    #print(d)
+    #print(2*e)
 
 main()
 #from this python experiment we can observe that the secant method is much more
