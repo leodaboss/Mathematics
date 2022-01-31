@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee051224-6144-4bc4-9a73-1a7691b30938" name="Changes" comment="amending">
-      <change afterPath="$PROJECT_DIR$/matrices.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matrices.py" beforeDir="false" afterPath="$PROJECT_DIR$/matrices.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/polynomials.py" beforeDir="false" afterPath="$PROJECT_DIR$/polynomials.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +36,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
-  <component name="RunManager" selected="Python.polynomials">
+  <component name="RunManager" selected="Python.matrices">
     <configuration name="euclid_algorithm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Mathematics" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -144,8 +144,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.polynomials" />
         <item itemvalue="Python.matrices" />
+        <item itemvalue="Python.polynomials" />
         <item itemvalue="Python.reverse_polish_notation" />
         <item itemvalue="Python.euclid_algorithm" />
         <item itemvalue="Python.interval_bisection" />
@@ -175,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643551229626</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="amending">
+      <created>1643590826838</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1643590826838</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -191,6 +198,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="stuff" />
+    <MESSAGE value="amending" />
+    <option name="LAST_COMMIT_MESSAGE" value="amending" />
   </component>
 </project>

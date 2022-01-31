@@ -146,6 +146,19 @@ class Matrix:
         reduced = Matrix.delete_row_list(matrix, 0)
         return sum([matrix[0][j] * (-1) ** j * Matrix.determinant_helper(Matrix.delete_column_list(reduced, j)) for j in
                     range(n)])
+    def power(self, n):
+        if n < 0 or self.columns!=self.rows:
+            return
+        return self.power_helper(n)
+
+    def power_helper(self, n):
+        if n == 0:
+            return Matrix(Matrix.ones(n,n))
+        if n == 1:
+            return self.__copy__()
+        return self * self.power_helper(n - 1)
+    def __copy__(self):
+        return Matrix(self.coefficients.copy())
 
 
 def main():
@@ -165,6 +178,8 @@ def main():
     # print(Matrix.multiply_matrices(matrix1, matrix1.transpose))
     # matrix1.add(matrix2)
     # print(matrix1)
+    print(matrix3.power(3))
+    print(matrix3)
 
 
 main()

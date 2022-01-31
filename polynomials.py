@@ -23,24 +23,41 @@ class Polynomial:
     @property
     def degree(self):
         return len(self.coefficients)
+
     @property
     def leading_coefficient(self):
         return self.coefficients[-1]
 
     @staticmethod
-    def get_power_lead(n,lead):
-        new=[0 for i in range(n)]
+    def get_power_lead(n, lead):
+        new = [0 for i in range(n)]
         new.append(lead)
         return Polynomial(new)
+
     @staticmethod
     def get_power(n):
-        return Polynomial.get_power_lead(n,1)
+        return Polynomial.get_power_lead(n, 1)
+
     @staticmethod
     def get_one():
-        return Polynomial.get_power(0,1)
+        return Polynomial.get_power(0, 1)
+
     @staticmethod
     def get_x():
-        return Polynomial.get_power(1,1)
+        return Polynomial.get_power(1, 1)
+
+    def power(self, n):
+        if n < 0:
+            return
+        return self.power_helper(n)
+
+    def power_helper(self, n):
+        if n == 0:
+            return Polynomial([1])
+        if n == 1:
+            return self.__copy__()
+        return self * self.power_helper(n - 1)
+
     def __str__(self):
         string = 'f(x) = '
         for i in range(self.degree):
@@ -54,6 +71,9 @@ class Polynomial:
                 string += ' + '
 
         return string[:len(string) - 2]
+
+    def __copy__(self):
+        return Polynomial(self.coefficients.copy())
 
     def __set_coefficients(self, index, number):
         if index < 0:
@@ -69,12 +89,12 @@ class Polynomial:
 
     def change_coefficient(self, index, number):
         current = self.get_coefficient(index)
-        self.__set_coefficients( index, number + current)
+        self.__set_coefficients(index, number + current)
 
     def get_coefficient(self, index):
         if index < 0:
             print('not possible')
-        if index>=self.degree:
+        if index >= self.degree:
             return 0
         return self.coefficients[index]
 
@@ -89,8 +109,8 @@ class Polynomial:
             self.coefficients = self.coefficients[:i + 1]
 
     def __add__(self, operand):
-        n=max(self.degree,operand.degree)
-        coeffs=[self.get_coefficient(i)+operand.get_coefficient(i) for i in range(n)]
+        n = max(self.degree, operand.degree)
+        coeffs = [self.get_coefficient(i) + operand.get_coefficient(i) for i in range(n)]
         return Polynomial(coeffs)
 
     def __sub__(self, operand):
@@ -102,7 +122,7 @@ class Polynomial:
         return Polynomial([i * constant for i in self.coefficients])
 
     def __mul__(self, operand):
-        new = [0 for i in range(self.degree + operand.degree-1)]
+        new = [0 for i in range(self.degree + operand.degree - 1)]
         for i in range(self.degree):
             for j in range(operand.degree):
                 new[i + j] += self.get_coefficient(i) * operand.get_coefficient(j)
@@ -111,15 +131,17 @@ class Polynomial:
     def evaluate(self, number):
         return sum([self.coefficients[i] * number ** i for i in range(self.degree)])
 
-    def __mod__(self,operand):
-        if operand.degree==0:
+    def __mod__(self, operand):
+        if operand.degree == 0:
             print('Impossible')
             return
         d = self.degree - operand.degree
-        if d<0:
+        if d < 0:
             return Polynomial(self.coefficients[:])
-        subtract=operand*Polynomial.get_power_lead(d,self.leading_coefficient/operand.leading_coefficient)
-        return (self-subtract)%operand
+        subtract = operand * Polynomial.get_power_lead(d, self.leading_coefficient / operand.leading_coefficient)
+        return (self - subtract) % operand
+
+
 def main():
     coeffs1 = [6, 1, 2, 6, 4]
     coeffs2 = [2, 3, 4]
@@ -130,13 +152,14 @@ def main():
     print(pol1.multiply_constant(2))
     print(pol1.evaluate(1))
     print(pol2)
-    pol3=pol1*pol2
+    pol3 = pol1 * pol2
     print('Multiplied gives: ')
     print(pol3)
     print('remainder:')
-    print(pol1%Polynomial.get_power(2))
+    print(pol1 % Polynomial.get_power(2))
     print(pol3.leading_coefficient)
     print(pol3.coefficients)
+    print(pol3.power(3))
 
 
 main()
