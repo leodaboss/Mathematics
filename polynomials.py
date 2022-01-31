@@ -6,12 +6,12 @@ Created on Sat Jan 29 11:11:54 2022
 """
 
 
-class Polynomial:
+class Polynomial():
     def __init__(self, coeffs=[]):
         self.__coefficients = coeffs
         self.check_zeros()
 
-    # useful properties and setters
+    # properties and setters
     @property
     def coefficients(self):
         return self.__coefficients
@@ -36,7 +36,7 @@ class Polynomial:
         else:
             return Polynomial([(i + 1) * self.get_coefficient(i + 1) for i in range(self.degree - 1)])
 
-    # generates generic polynomials of certain shape
+    # generates generic polynomials
     @staticmethod
     def get_power_lead(n, lead):
         new = [0 for i in range(n)]
@@ -51,7 +51,7 @@ class Polynomial:
     def constant(constant):
         return Polynomial.get_power_lead(0, constant)
 
-    # useful polynomials that are regularly used
+    # polynomials that are regularly used
     @staticmethod
     def identity():
         return Polynomial([1])
@@ -64,7 +64,7 @@ class Polynomial:
     def get_x():
         return Polynomial.get_power(1)
 
-    #manipulation of polynomials
+    # manipulation of polynomials
     def set_coefficients(self, index, number):
         if index < 0:
             print('not possible')
@@ -91,19 +91,24 @@ class Polynomial:
     # Check zeros at start of list of coefficients and changes it accordingly
     def check_zeros(self):
         if not self.coefficients:
-            return
+            self.__coefficients=[0]
         i = self.degree - 1
         while self.coefficients[i] == 0:
             if i == -1:
-                self.coefficients = []
+                self.__coefficients = [0]
                 return
             i -= 1
         if i != self.degree - 1:
             self.coefficients = self.coefficients[:i + 1]
 
-    #returns polynomial evaluated at a value
+    # returns polynomial evaluated at a value
     def evaluate(self, number):
         return sum([self.get_coefficient(i) * number ** i for i in range(self.degree)])
+
+    #returns evaluator
+    @property
+    def evaluator(self):
+        return lambda x: self.evaluate(x)
 
     # overrides methods
     def __add__(self, operand):
@@ -213,6 +218,7 @@ def main():
     pol1 = Polynomial(coeffs1)
     pol2 = Polynomial(coeffs2)
     print(pol2)
+    print(Polynomial.zero()**2)
     print(pol2.derivative)
     print(pol2.leading_coefficient)
     print(pol1)
@@ -227,5 +233,6 @@ def main():
     print(pol3.leading_coefficient)
     print(pol3.coefficients)
     print(pol3 ** 3)
+    print(pol3.evaluator)
 
 main()
