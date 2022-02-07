@@ -249,16 +249,17 @@ class SquareMatrix(Matrix):
 
 
 def main():
-    test = [[1, 2, 3], [3, 4, 5], [9, 6, 0]]
+    test = [[-2,2,0], [2,-3,1], [0,2,-2]]
     matrix1 = Matrix.ones(2, 9)
     matrix2 = Matrix.ones(2, 9)
     matrix3 = SquareMatrix(test)
+    print(test.characteristic)
     # print(matrix1 + matrix2)
-    print(matrix3)
-    print(SquareMatrix.generate_random_uniform(4))
-    print(matrix3.characteristic)
-    print(matrix3 ** 2)
-    print(matrix3)
+    #print(matrix3)
+    #print(SquareMatrix.generate_random_uniform(4))
+    #print(matrix3.characteristic)
+    #print(matrix3 ** 2)
+    #(matrix3)
     # print(matrix1)
     # print(matrix1.transpose)
     # print(Matrix.delete_row(matrix1, 1))
