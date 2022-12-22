@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee051224-6144-4bc4-9a73-1a7691b30938" name="Changes" comment="amending" />
+    <list default="true" id="ee051224-6144-4bc4-9a73-1a7691b30938" name="Changes" comment="amending">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RootFinding.py" beforeDir="false" afterPath="$PROJECT_DIR$/RootFinding.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,8 +50,8 @@
       <recent name="C:\Users\leoda\Google Drive\Documents\python\Github\Mathematics" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.newton_iteration">
-    <configuration name="euclid_algorithm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.Matrices">
+    <configuration name="Matrices" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Mathematics" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -60,7 +63,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/euclid_algorithm.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Matrices.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -155,11 +158,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Matrices" />
         <item itemvalue="Python.newton_iteration" />
         <item itemvalue="Python.polynomials" />
         <item itemvalue="Python.matrices" />
         <item itemvalue="Python.reverse_polish_notation" />
-        <item itemvalue="Python.euclid_algorithm" />
       </list>
     </recent_temporary>
   </component>
@@ -221,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643671708572</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="amending">
+      <created>1644230217378</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1644230217378</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

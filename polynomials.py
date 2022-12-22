@@ -4,6 +4,7 @@ Created on Sat Jan 29 11:11:54 2022
 
 @author: leoda
 """
+import RootFinding
 
 
 class Polynomial():
@@ -207,6 +208,9 @@ class Polynomial():
             new += H * Polynomial.constant(interpolants[i]) + K * Polynomial.constant(derivatives[i])
         return new
 
+    def find_root(self,bottom, top,tol):
+        return RootFinding.RootFinding.bisection(bottom,top,tol,self.evaluator)
+
 
 def main():
     coeffs1 = [6, 1, 2, 6, 4]
@@ -235,4 +239,4 @@ def main():
     print(pol3 ** 3)
     print(pol3.evaluator)
 
-main()
+#main()

@@ -1,6 +1,6 @@
 import random
 
-from polynomials import Polynomial
+from Polynomials import Polynomial
 
 
 class Matrix:
@@ -250,10 +250,12 @@ class SquareMatrix(Matrix):
 
 def main():
     test = [[-2,2,0], [2,-3,1], [0,2,-2]]
+    matrix4=SquareMatrix(test)
     matrix1 = Matrix.ones(2, 9)
     matrix2 = Matrix.ones(2, 9)
     matrix3 = SquareMatrix(test)
-    print(test.characteristic)
+    print(matrix4.characteristic)
+    print(matrix4.characteristic.find_root(-1,1.5,0.003))
     # print(matrix1 + matrix2)
     #print(matrix3)
     #print(SquareMatrix.generate_random_uniform(4))

@@ -1,35 +1,5 @@
 import math
 
-
-class Function():
-    def __init__(self, func):
-        self.__function = func
-        return
-
-    @property
-    def function(self):
-        return self.__function
-
-    @function.setter
-    def set_function(self, func):
-        self.__function = func
-
-    def evaluate(self, *x):
-        return self.function(*x)
-
-    def composition(self, func):
-        return Function((lambda *x: self.evaluate(func.evaluate(*x))))
-
-
-class BinaryFunction(Function):
-    def __init__(self, func):
-        super.__init__(self, func)
-        return
-
-    def evaluate(self, x, y):
-        return
-
-
 class RootFinding():
     @staticmethod
     def get_linear():
