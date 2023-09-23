@@ -17,7 +17,7 @@ def diophantine(repetitions):
         value1=solve_diophantine1(j)
         value2=solve_diophantine2(j)
         if value1!=value2:
-            print('for '+str(j)+' we have a probelm with '+str(value1)+'!='+str(value2))
+            print('for '+str(j)+' we have a problem with '+str(value1)+'!='+str(value2))
             
         if value1>max_value:
             maximum=j
@@ -42,15 +42,14 @@ def solve_diophantine1(D):
 def solve_diophantine2(D):
     if is_square(D):
         return 0
-    root=math.floor(math.sqrt(D))
-    a=D-root**2
-    b=2*root
-    x,y=a,b
-    while (x+root*y)**2-D*y**2!=1:
-        z=b*y+x
-        x=a*y
-        y=z
-        print(str(root)+' + '+str(x)+'/'+str(y))
-    return x+root*y
+    x,y=D,1
+    counter=0
+    while x**2-D*y**2!=1 and counter<10:
+        z=D*y+x
+        y+=x
+        x=z
+        print(str(x)+'/'+str(y))
+        counter+=1
+    return x
 
-print(diophantine(10))
+print(solve_diophantine2(3))
