@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee051224-6144-4bc4-9a73-1a7691b30938" name="Changes" comment="amending">
-      <change afterPath="$PROJECT_DIR$/scratch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Mathematics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Mathematics.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/discrete_logistic_growth.py" beforeDir="false" afterPath="$PROJECT_DIR$/discrete_logistic_growth.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +36,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="24MzcGzEZ8e1B7VID7GUrkAvEbn" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -48,7 +50,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true"
+    "ignore.virus.scanning.warn.message": "true",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   },
   "keyToStringList": {
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
@@ -56,6 +59,20 @@
     ]
   }
 }]]></component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="Mathematics" sdk-home="C:\Users\leoda\PycharmProjects\pythonProject\venv\Scripts\python.exe">
+        <option name="sdk">
+          <Sdk />
+        </option>
+        <option name="mySdkHome" value="C:\Users\leoda\PycharmProjects\pythonProject\venv\Scripts\python.exe" />
+        <option name="mySdk">
+          <Sdk />
+        </option>
+        <option name="myModuleName" value="Mathematics" />
+      </console-settings>
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\leoda\Google Drive\Documents\python\Github\Mathematics" />
@@ -65,7 +82,7 @@
       <recent name="C:\Users\leoda\Google Drive\Documents\python\Github\Mathematics\Project_Euler" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.discrete_logistic_growth">
     <configuration name="Matrices" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Mathematics" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,6 +96,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Matrices.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="discrete_logistic_growth" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Mathematics" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.8 (pythonProject)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/discrete_logistic_growth.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -150,34 +189,12 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="reverse_polish_notation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Mathematics" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/reverse_polish_notation.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Matrices" />
         <item itemvalue="Python.newton_iteration" />
         <item itemvalue="Python.polynomials" />
         <item itemvalue="Python.matrices" />
-        <item itemvalue="Python.reverse_polish_notation" />
       </list>
     </recent_temporary>
   </component>
