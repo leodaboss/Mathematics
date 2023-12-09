@@ -20,7 +20,7 @@ def discrete_logistic_growth():
     #iterations=int(input('Number of iterations'))
     iterands=[x]
     for i in range(iterations):
-        x=r*x/(1-x)^b
+        x=r*x/(1+x)^b
         iterands.append(x)
         print(x)
     return iterands
