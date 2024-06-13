@@ -209,7 +209,7 @@ class Polynomial():
         return new
 
     def find_root(self,bottom, top,tol):
-        return RootFinding.RootFinding.bisection(bottom,top,tol,self.evaluator)
+        return RootFinding.RootFinding.bisection(bottom, top, tol, self.evaluator)
 
 
 def main():
