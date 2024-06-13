@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee051224-6144-4bc4-9a73-1a7691b30938" name="Changes" comment="amending">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SLiM/admix.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SLiM/admix.trees" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SLiM/decap.trees" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SLiM/recap.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SLiM/recap.trees" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SLiM/selcoeff.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SLiM/treeSequencing.slim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SLiM/overlay.trees" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,9 +67,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Python.Matrices.executor": "Run",
+    "Python.admix.executor": "Run",
     "Python.discrete_logistic_growth.executor": "Run",
+    "Python.recap.executor": "Run",
     "Python.scratch.executor": "Run",
+    "Python.selcoeff.executor": "Run",
     "Python.ts_overlay (1).executor": "Run",
     "Python.ts_overlay.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -82,8 +93,8 @@
       <recent name="C:\Users\leoda\Google Drive\Documents\python\Github\Mathematics" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ts_overlay (1)">
-    <configuration name="Matrices" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.selcoeff">
+    <configuration name="admix" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Mathematics" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -92,11 +103,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SLiM" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Matrices.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SLiM/admix.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -105,7 +116,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="discrete_logistic_growth" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="recap" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Mathematics" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -114,11 +125,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SLiM" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/discrete_logistic_growth.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SLiM/recap.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -127,7 +138,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="newton_iteration" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="selcoeff" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Mathematics" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -136,11 +147,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SLiM" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/newton_iteration.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SLiM/selcoeff.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -195,11 +206,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.selcoeff" />
+        <item itemvalue="Python.recap" />
+        <item itemvalue="Python.admix" />
         <item itemvalue="Python.ts_overlay (1)" />
         <item itemvalue="Python.ts_overlay" />
-        <item itemvalue="Python.discrete_logistic_growth" />
-        <item itemvalue="Python.Matrices" />
-        <item itemvalue="Python.newton_iteration" />
       </list>
     </recent_temporary>
   </component>
@@ -283,7 +294,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718287696598</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="amending">
+      <option name="closed" value="true" />
+      <created>1718288940790</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1718288940790</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -298,6 +317,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="stuff" />
     <MESSAGE value="amending" />
     <option name="LAST_COMMIT_MESSAGE" value="amending" />
