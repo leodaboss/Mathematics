@@ -14,13 +14,14 @@ def discrete_logistic_growth():
     x=0.51
     b=1.2
     iterations=100
-    r=float(input('Growth rate here'))
-    b=float(input('How small growth'))
+    #iterations=100
+    #r=float(input('Growth rate here'))
+    #b=float(input('How small growth'))
     #x=float(input('Start value here'))
     #iterations=int(input('Number of iterations'))
     iterands=[x]
     for i in range(iterations):
-        x=r*x/(1+x)^b
+        x=r*x/(1+x)**b
         iterands.append(x)
         print(x)
     return iterands
