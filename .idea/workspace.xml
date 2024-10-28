@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee051224-6144-4bc4-9a73-1a7691b30938" name="Changes" comment="amending">
-      <change beforePath="$PROJECT_DIR$/.idea/Mathematics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Mathematics.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Traveling waves/simulatePDE.py" beforeDir="false" afterPath="$PROJECT_DIR$/Traveling waves/simulatePDE.py" afterDir="false" />
     </list>
@@ -275,7 +273,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730108033944</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="amending">
+      <option name="closed" value="true" />
+      <created>1730114055572</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1730114055572</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

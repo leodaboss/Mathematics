@@ -69,8 +69,9 @@ class one_dimensional():
     f_kernel_scaled = lambda x: dx * f_kernel([z * dx for z in x])
     def __init__(self,k=1,dirac=False,diameter_grid=diameter_grid,time=0,
                  initial_condition=None):
-        self.matrices=np.zeros((k,diameter_grid))
-        self.laplacian=np.zeros(diameter_grid-2)
+        self.matrix=np.zeros((k,diameter_grid))
+        self.laplacian=np.zeros((k,diameter_grid-2))
+        self.divisions=k
         self.dirac=dirac
         self.time=time
         self.conv_matrix=np.array(one_dimensional.convolution_matrix(g=
@@ -82,9 +83,9 @@ class one_dimensional():
         return [g([i - size]) for i in range(2 * size + 1)]
 
     def update_laplacian(self):
-        Ztop = self.matrix[0:-2]
-        Zbottom = self.matrix[2:]
-        Zcenter = self.matrix[1:-1]
+        Ztop = self.matrix[:,0:-2]
+        Zbottom = self.matrix[:,2:]
+        Zcenter = self.matrix[:,1:-1]
         self.laplacian= Ztop + Zbottom - 2 * Zcenter
     @staticmethod
     def laplacian(V):
@@ -99,11 +100,15 @@ class one_dimensional():
         return np.array(self.matrix)
 
     # This returns a plot of the graph of U
-    @staticmethod
-    def show_patterns(U, ax=None, axis_off=True):
-        ax.plot(U)
-        if axis_off:
-            ax.set_axis_off()
+    def show_patterns(self, ax=None, axis_off=True):
+        V = np.zeros(len(self.matrix[0, :]))
+        for A in self.matrix:
+            V += A
+            ax.plot(V)
+        ax.set_axis_off()
+        ax.set_title(f'$t={self.time:.2f}$')
+        print('well done')
+        return ax
 
     # This function intialises the initial condition
     def initialise_specific(radius_initial, g, zero_point=radius_grid):
