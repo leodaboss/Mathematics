@@ -2,30 +2,12 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import scipy
-from numpy.f2py.auxfuncs import throw_error
-
-
-# This function gets the input from the user
-def get_typed_input(prompt, expected_type=int, allowed_values=None):
-    while True:
-        try:
-            user_input = expected_type(input(prompt))
-            if allowed_values != None and user_input not in allowed_values:
-                raise ValueError('Number outside of range')
-            return user_input
-        except ValueError as e:
-            print(f"Erreur : {e}.")
-
-
+from scipy.ndimage import convolve1d
 
 # model details
 # initial conditions
 a = 1
 mu = 1
-dimension = get_typed_input("What should be the dimension of the simulation(either 1 or 2)?",
-                            allowed_values=[1,2])  # dimension of the space
-T = get_typed_input("How long should the simulation run for(recommended is 20)?")  # total time
-L = get_typed_input("How big should the simulation be(recommended is 25)?")  # How far it extends in space
 
 variance_init = 1.5  # Variance of initial distribution
 sd_limit_init = 4  # How far we compute the initial configuration away in standard deviations
@@ -38,11 +20,6 @@ f = lambda x, variance: math.exp(-(sum([z ** 2 for z in x])) / (2 * variance)) /
 f_init = lambda x: f(x, variance_init)
 f_kernel = lambda x: f(x, variance_kernel)
 
-# accuracy of approximation+ bounds
-dx = get_typed_input("What should the dx parameter be(good choice is .1)?",
-                     expected_type=float)   # space step
-dt = get_typed_input("What should the dt parameter be(good choice is .001)?",
-                     expected_type=float)  # time step
 
 # scaling
 f_init_scaled = lambda x: f_init([z * dx for z in x])
@@ -62,6 +39,142 @@ wave_speed *= 0.95
 # graphs
 number_plots = 9
 step_plot = iterations // number_plots
+
+def get_typed_input(prompt, expected_type=int, allowed_values=None):
+    while True:
+        try:
+            user_input = expected_type(input(prompt))
+            if allowed_values is not None and user_input not in allowed_values:
+                raise ValueError('Number outside of range')
+            return user_input
+        except ValueError as e:
+            print(f"Error: {e}.")
+
+def initialize_parameters():
+    dimension = get_typed_input("Dimension of the simulation (1 or 2)?", allowed_values=[1, 2])
+    T = get_typed_input("Total simulation time (recommended 20)?")
+    L = get_typed_input("Simulation space size (recommended 25)?")
+    dx = get_typed_input("dx parameter (recommended 0.1)?", expected_type=float)
+    dt = get_typed_input("dt parameter (recommended 0.001)?", expected_type=float)
+    return dimension, T, L, dx, dt
+
+def f(x, variance, dimension):
+    return math.exp(-(sum(z ** 2 for z in x)) / (2 * variance)) / math.sqrt((2 * math.pi * variance) ** dimension)
+
+def scale_function(f, dx):
+    return lambda x: f([z * dx for z in x])
+
+def convolution_matrix(g, size):
+    return [g([i - size]) for i in range(2 * size + 1)]
+
+class OneDimensional:
+    def __init__(self, k=1, dirac=False, diameter_grid=None, initial_condition=None):
+        self.matrix = np.zeros((k, diameter_grid))
+        self.laplacian = np.zeros((k, diameter_grid - 2))
+        self.divisions = k
+        self.dirac = dirac
+        self.time = 0
+        self.conv_matrix = np.array(convolution_matrix(OneDimensional.f_kernel_scaled, radius_kernel_scaled))
+        if initial_condition is not None:
+            self.matrix = initial_condition
+
+    def update_laplacian(self):
+        Ztop = self.matrix[:, 0:-2]
+        Zbottom = self.matrix[:, 2:]
+        Zcenter = self.matrix[:, 1:-1]
+        self.laplacian = Ztop + Zbottom - 2 * Zcenter
+
+    def convolution(self):
+        if not self.dirac:
+            return convolve1d(self.matrix, weights=self.conv_matrix, mode='reflect')
+        return np.array(self.matrix)
+
+    def show_patterns(self, ax=None, axis_off=True):
+        V = np.zeros(len(self.matrix[0, :]))
+        for A in self.matrix:
+            V += A
+            ax.plot(V)
+        ax.set_axis_off()
+        ax.set_title(f'$t={self.time:.2f}$')
+        return ax
+
+    def update(self):
+        t = self.time
+        V = self.matrix
+        dirac = self.dirac
+        conv_matrix = self.conv_matrix
+        k_1 = OneDimensional.f(t, V, conv_matrix, dirac)
+        k_2 = OneDimensional.f(t + dt / 2, V + dt / 2 * k_1, conv_matrix, dirac)
+        k_3 = OneDimensional.f(t + dt / 2, V + dt / 2 * k_2, conv_matrix, dirac)
+        k_4 = OneDimensional.f(t + dt, V + dt * k_3, conv_matrix, dirac)
+        W = V + dt / 6 * (k_1 + 2 * k_2 + 2 * k_3 + k_4)
+        W[:, 0] = W[:, 1]
+        W[:, -1] = W[:, -2]
+        self.time += dt
+        self.matrix = W
+
+    @staticmethod
+    def f(t, V, conv_matrix, dirac):
+        sumV = [sum(V[j, i] for j in range(len(V[:, 0]))) for i in range(len(V[0, :]))]
+        conv = OneDimensional.convolution(sumV, conv_matrix, dirac)
+        W = np.zeros(V.shape)
+        for i in range(len(V[:, 0])):
+            deltaV = OneDimensional.laplacian(V[i, :]) / dx ** 2
+            Vc = V[i, 1:-1]
+            W[i, 1:-1] = a * deltaV + mu * Vc * (1 - conv[1:-1])
+            W[i, 0] = V[i, 1]
+            W[i, -1] = V[i, -2]
+        return W
+
+# Similar modifications can be made to the TwoDimensional class
+
+def main1():
+    U = OneDimensional.initialise_heaviside()
+    fig, axes = plt.subplots(3, 3, figsize=(8, 8))
+    for i in range(iterations):
+        if i % step_plot == 0 and i < number_plots * step_plot:
+            ax = axes.flat[i // step_plot]
+            OneDimensional.show_patterns(U, ax=ax)
+            ax.set_title(f'$t={i * dt:.2f}$')
+        U = OneDimensional.update_explicit_euler_1_equation(U)
+    fig.show()
+
+def main2(k, dirac):
+    interval = int(diameter_grid / 2 / k)
+    shift_wave = None if wave_speed == 0.0 else int(dx / (dt * wave_speed))
+    U = np.zeros(shape=(k, diameter_grid))
+    for i in range(k):
+        U[i, :] = OneDimensional.initialise_heaviside(i * interval, (i + 1) * interval)
+    conv_matrix = OneDimensional.convolution_matrix(g=OneDimensional.f_kernel_scaled, size=radius_kernel_scaled)
+    fig, axes = plt.subplots(3, 3, figsize=(8, 8))
+    for i in range(iterations):
+        if i % step_plot == 0 and i < number_plots * step_plot:
+            ax = axes.flat[i // step_plot]
+            V = np.zeros(len(U[0, :]))
+            length = len(U[:, 0])
+            for j in range(length):
+                end = (j == length - 1)
+                V = V + U[j, :]
+                OneDimensional.show_patterns(V, ax=ax, axis_off=end)
+            ax.set_title(f'$t={i * dt:.2f}$')
+        if shift_wave is not None and i % shift_wave == 0:
+            for j in range(len(U)):
+                U[j, :] = np.append(U[j, 1:], 0)
+        U = OneDimensional.update_explicit_euler_k_equation(i * dt, U, conv_matrix, dirac)
+    plt.show()
+
+if __name__ == "__main__":
+    dimension, T, L, dx, dt = initialize_parameters()
+    if dimension == 1:
+        main2(k=10, dirac=False)
+    elif dimension == 2:
+        main1()
+
+
+
+
+
+
 
 
 class one_dimensional():
