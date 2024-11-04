@@ -2,7 +2,9 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import scipy
+import cv2
 from scipy.ndimage import convolve1d
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
 # model details
 # initial conditions
@@ -48,7 +50,7 @@ def convolution_matrix(g, size):
     return [g([i - size]) for i in range(2 * size + 1)]
 
 class OneDimensional:
-    f_init = lambda x,dimension: OneDimensional.function(x, variance_init)
+    f_init = lambda x: OneDimensional.function(x, variance_init)
     f_kernel = lambda x: OneDimensional.function(x, variance_kernel)
     def __init__(self, dx,dt,time=0,k=1, dirac=False, diameter_grid=None, initial_condition=None):
         self.matrix = np.zeros((k, diameter_grid))
@@ -65,7 +67,7 @@ class OneDimensional:
     def initialise_convolution():
         return np.array(convolution_matrix(scale_function(OneDimensional.f_kernel,dx),
                                            radius_kernel_scaled))
-
+    @staticmethod
     def function(x, variance):
         return function(x,variance,1)
     def get_laplacian(self):
@@ -87,8 +89,8 @@ class OneDimensional:
         for A in self.matrix:
             V += A
             ax.plot(V)
-        ax.set_axis_off()
         ax.set_title(f'$t={self.time:.2f}$')
+        ax.set_axis_off()
         return ax
     def get_sum(self):
         return np.array([sum([self.matrix[j, i] for j in range(self.divisions)])
@@ -122,9 +124,11 @@ class OneDimensional:
         deltaV = self.get_laplacian() / dx ** 2
         Vc = V[:, 1:-1]
         # Allen-Kahn equation
-        W[:, 1:-1] = a * deltaV + mu * Vc * (1 - big_conv[:,1:-1])*(2*big_conv[:,1:-1]-1)
+        #W[:, 1:-1] = a * deltaV + mu * Vc * (1 - big_conv[:,1:-1])*(2*big_conv[:,1:-1]-1)
         # Fisher-KPP equation
-        #W[:, 1:-1] = a * deltaV + mu * Vc * (1 - big_conv[:,1:-1])
+        W[:, 1:-1] = a * deltaV + mu * Vc * (1 - big_conv[:,1:-1])
+
+        #boundary conditions
         W[:, 0] = V[:, 1]
         W[:, -1] = V[:, -2]
         return W
@@ -139,42 +143,54 @@ class OneDimensional:
 
 # Similar modifications can be made to the TwoDimensional class
 
-def main2():
-    U = OneDimensional.initialise_heaviside()
+def main2(dx,dt,k, dirac,diameter_grid,iterations,fps=30,number_plots=30):
+    U = TwoDimensional(dx,dt,k=k, dirac=dirac, diameter_grid=diameter_grid)
     fig, axes = plt.subplots(3, 3, figsize=(8, 8))
-    for i in range(iterations):
-        if i % step_plot == 0 and i < number_plots * step_plot:
-            ax = axes.flat[i // step_plot]
-            OneDimensional.show_patterns(U, ax=ax)
-            ax.set_title(f'$t={i * dt:.2f}$')
-        U = OneDimensional.update_explicit_euler_1_equation(U)
-    fig.show()
-
-def main1(dx,dt,k, dirac,diameter_grid,iterations):
-    interval = int(diameter_grid / 2 / k)
-    U = OneDimensional(dx,dt,k=k, dirac=dirac, diameter_grid=diameter_grid)
-    for i in range(k):
-        U.matrix[i, :] = OneDimensional.initialise_heaviside(i * interval, (i + 1) * interval,
-                                                             diameter_grid=diameter_grid)
-    fig, axes = plt.subplots(3, 3, figsize=(8, 8))
+    step_plot = iterations // number_plots
     for i in range(iterations):
         if i % step_plot == 0 and i < number_plots * step_plot:
             ax = axes.flat[i // step_plot]
             U.show_patterns(ax=ax)
             ax.set_title(f'$t={i * dt:.2f}$')
-            print(i * dt)
-        if U.shift_wave is not None and i % U.shift_wave == 0:
-            U.shift_left()
         U.update()
     plt.show()
 
+def main1(dx,dt,k, dirac,diameter_grid,iterations,fps=30,number_plots=30):
+    #initial conditions
+    interval = int(diameter_grid / 2 / k)
+    step_plot = iterations // number_plots
+    U = OneDimensional(dx,dt,k=k, dirac=dirac, diameter_grid=diameter_grid)
+    for i in range(k):
+        U.matrix[i, :] = OneDimensional.initialise_heaviside(i * interval, (i + 1) * interval,
+                                                             diameter_grid=diameter_grid)
+    #video
+    height, width = 480, 640  # Dimensions de la vidéo
+    video = cv2.VideoWriter('video_collage.avi', cv2.VideoWriter_fourcc(*'DIVX'), fps, (width, height))
+    #Letting DE evolve
+    for i in range(iterations):
+        if i % step_plot == 0:
+            fig,ax= plt.subplots()
+            U.show_patterns(ax=ax)
+            ax.set_title(f'$t={i * dt:.2f}$')
+            canvas = FigureCanvas(fig)
+            canvas.draw()
+            img = np.frombuffer(canvas.tostring_rgb(), dtype='uint8')
+            img = img.reshape(canvas.get_width_height()[::-1] + (3,))
+            img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+            video.write(img)
+            plt.close(fig)
+        if U.shift_wave is not None and i % U.shift_wave == 0:
+            U.shift_left()
+        U.update()
+    video.release()
+    cv2.destroyAllWindows()
+
+
 if __name__ == "__main__":
     #dimension, T, L, dx, dt, k, dirac = initialize_parameters()
-    dimension, T, L, dx, dt, k, dirac = 1, 10, 25, 0.1, 0.001, 10, 0
-
+    dimension, T, L, dx, dt, k, dirac = 1, 20, 25, 0.1, 0.001, 10, 0
+    fps=30
     # scaling
-    f_init_scaled = lambda x: f_init([z * dx for z in x])
-    f_kernel_scaled = lambda x: f_kernel([z * dx for z in x])
     radius_init_scaled = int(radius_init / dx)
     radius_kernel_scaled = int(radius_kernel / dx)
     diameter_kernel_scaled = 2 * radius_kernel_scaled + 1
@@ -185,49 +201,104 @@ if __name__ == "__main__":
     # speed of wave
     wave_speed = 2 * math.sqrt(mu)
     # correct for inefficiencies
-    wave_speed *= 0.95
+    wave_speed *= 1
 
     # graphs
-    number_plots = 9
-    step_plot = iterations // number_plots
+    number_plots = fps*T
     if dimension == 1:
         main1(dx=dx, dt=dt, k=k, dirac=dirac,diameter_grid=diameter_grid,iterations=
-              iterations)
+              iterations,fps=fps,number_plots=number_plots)
     elif dimension == 2:
         main2()
 
 
+class TwoDimensional:
+    f_init = lambda x: TwoDimensional.function(x, variance_init)
+    f_kernel = lambda x: TwoDimensional.function(x, variance_kernel)
+    def __init__(self, dx,dt,time=0,k=1, dirac=False, diameter_grid=None, initial_condition=None):
+        self.matrix = np.zeros((k, diameter_grid))
+        self.divisions = k
+        self.diameter_grid = diameter_grid
+        self.dirac = dirac
+        self.time = time
+        self.dt=dt
+        self.conv_matrix = TwoDimensional.initialise_convolution()
+        if initial_condition is not None:
+            self.matrix = initial_condition
+        self.shift_wave = None if wave_speed == 0.0 else int(dx / (dt*wave_speed))
+    @staticmethod
+    def initialise_convolution():
+        return np.array(convolution_matrix(scale_function(TwoDimensional.f_kernel,dx),
+                                           radius_kernel_scaled))
+    @staticmethod
+    def function(x, variance):
+        return function(x,variance,2)
+    def get_laplacian(self):
+        Ztop = self.matrix[0:-2, 1:-1]
+        Zbottom = self.matrix[2:, 1:-1]
+        Zleft=self.matrix[1:-1, 0:-2]
+        Zright=self.matrix[1:-1, 2:]
+        Zcenter = self.matrix[1:-1, 1:-1]
+        return (Ztop + Zbottom+Zright+Zleft) - 4 * Zcenter
+
+    def convolution(self):
+        if not self.dirac:
+            return scipy.convolve2d(self.matrix, self.conv_matrix, mode='symm')
+        return self.matrix
+    def show_patterns(self, ax=None, axis_off=True):
+        ax.imshow(self.matrix, cmap=plt.cm.copper,interpolation='bilinear',extent=[-1, 1, -1, 1])
+        ax.set_title(f'$t={self.time:.2f}$')
+        ax.set_axis_off()
+        return ax
+    def update(self):
+        t = self.time
+        V = self.matrix
+        dt=self.dt
+        k_1 = self.f( V,t)
+        k_2 = self.f(V + dt / 2 * k_1,t + dt / 2)
+        k_3 = self.f( V + dt / 2 * k_2,t + dt / 2)
+        k_4 = self.f( V + dt * k_3,t + dt)
+        W = V + dt / 6 * (k_1 + 2 * k_2 + 2 * k_3 + k_4)
+
+        # boundary conditions
+        W[0,:]=W[1,:]
+        W[-1, :] = W[-1, :]
+        for Z in W:
+            Z[0] = Z[1]
+            Z[-1] = Z[-2]
+        self.time += dt
+        self.matrix = W
+
+    def f(self, V,t=-1):
+        if t==-1:
+            t=self.time
+        conv = self.convolution()
+        W = np.zeros(V.shape)
+        deltaV = self.get_laplacian() / dx ** 2
+        Vc = V[:, 1:-1]
+        # Allen-Kahn equation
+        W[1:-1, 1:-1] = a * deltaV + mu * Vc * (1 - conv[1:-1,1:-1])*(2*conv[1:-1,1:-1]-1)
+        # Fisher-KPP equation
+        #W[1:-1, 1:-1] = a * deltaV + mu * Vc * (1 - conv[1:-1,1:-1])
 
 
-class TwoDimensional():
-    f_init_scaled = lambda x: dx ** 2 * f_init([z * dx for z in x])
-    f_kernel_scaled = lambda x: dx ** 2 * f_kernel([z * dx for z in x])
+        return W
+
+    @staticmethod
+    def initialise_heaviside(min_point, max_point,diameter_grid):
+        max_point = min(diameter_grid, max_point)  # truncate in case given wrong values
+        min_point = max(0, min_point)
+        V = np.zeros(diameter_grid)
+        V[min_point:max_point] += np.ones(max_point - min_point)
+        return V
+
+
+class TwoDimensional1():
 
     def convolution_matrix(g, size):
         return [[g([i, j] - size * np.ones(2)) \
                  for i in range(2 * size + 1)] for j in range(2 * size + 1)]
 
-    def laplacian(Z):
-        Ztop = Z[0:-2, 1:-1]
-        Zleft = Z[1:-1, 0:-2]
-        Zbottom = Z[2:, 1:-1]
-        Zright = Z[1:-1, 2:]
-        Zcenter = Z[1:-1, 1:-1]
-        return Ztop + Zleft + Zbottom + Zright - \
-            4 * Zcenter
-
-    def convolution(V, conv_matrix, dirac=False):
-        if not dirac:
-            return scipy.ndimage.convolve1d(V, weights=conv_matrix, mode='reflect')
-        return np.array(V)
-
-    # This returns a plot of the graph of U
-    def show_patterns(U, ax=None, axis_off=True):
-        ax.imshow(U, cmap=plt.cm.copper,
-                  interpolation='bilinear',
-                  extent=[-1, 1, -1, 1])
-        if axis_off:
-            ax.set_axis_off()
         # This function intialises the initial condition
 
     def initialise_specific(radius_initial, g, zero_point=[radius_grid, radius_grid]):
@@ -239,45 +310,4 @@ class TwoDimensional():
         V[zero_point[0] - radius_initial:zero_point[0] + radius_initial + 1, \
         zero_point[1] - radius_initial:zero_point[1] + radius_initial + 1] += centre
         return V
-        # We use Runge Kutta 4 to solve the autonomous system
-
-    def update_explicit_euler_equation(t, V, conv_matrix, dirac):
-        k_1 = one_dimensional.f(t, V, conv_matrix, dirac)
-        k_2 = one_dimensional.f(t + dt / 2, V + dt / 2 * k_1, conv_matrix, dirac)
-        k_3 = one_dimensional.f(t + dt / 2, V + dt / 2 * k_2, conv_matrix, dirac)
-        k_4 = one_dimensional.f(t + dt, V + dt * k_3, conv_matrix, dirac)
-        W = V + dt / 6 * (k_1 + 2 * k_2 + 2 * k_3 + k_4)
-        # Neumann conditions on Boundary
-        W[:, 0] = W[:, 1]
-        W[:, -1] = W[:, -2]
-        for Z in W:
-            Z[0] = Z[1]
-            Z[-1] = Z[-2]
-        W[0] = W[1]
-        W[-1] = W[-2]
-        return W
-
-    # we consider autonomous ODE y'(t)=f(t,y), gives back vector f(t,y)
-    def f(t, V, conv_matrix, dirac):
-        conv = two_dimensional.convolution( conv_matrix, dirac)
-        W = np.zeros(V.shape)
-        # We compute the Laplacian of V.
-        deltaV = two_dimensional.laplacian(V) / dx ** 2
-        # We take the values of V inside the grid.
-        Vc = V[1:-1, 1:-1]
-        # We update the variables.
-        W[1:-1, 1:-1] = a * deltaV + mu * Vc * (1 - conv[1:-1, 1:-1])
-        # Neumann conditions on Boundary
-        W[:, 0] = W[:, 1]
-        W[:, -1] = W[:, -2]
-        for Z in W:
-            Z[0] = Z[1]
-            Z[-1] = Z[-2]
-        W[0] = W[1]
-        W[-1] = W[-2]
-        return W
-
-
-
-
-
+        # We use Runge Kutta 4 to solve the autonomous system of ODEs
