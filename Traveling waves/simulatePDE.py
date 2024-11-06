@@ -52,7 +52,7 @@ def convolution_matrix(g, size):
 class OneDimensional:
     f_init = lambda x: OneDimensional.function(x, variance_init)
     f_kernel = lambda x: OneDimensional.function(x, variance_kernel)
-    def __init__(self, dx,dt,time=0,k=1, dirac=False, diameter_grid=None, initial_condition=None):
+    def __init__(self, dx,dt,time=0,k=1, dirac=False, diameter_grid=None, initial_condition=None,centre=True):
         self.matrix = np.zeros((k, diameter_grid))
         self.divisions = k
         self.diameter_grid = diameter_grid
@@ -60,9 +60,10 @@ class OneDimensional:
         self.time = time
         self.dt=dt
         self.conv_matrix = OneDimensional.initialise_convolution()
+        self.centre=centre
+        self.shifted=0
         if initial_condition is not None:
             self.matrix = initial_condition
-        self.shift_wave = None if wave_speed == 0.0 else int(dx / (dt*wave_speed))
     @staticmethod
     def initialise_convolution():
         return np.array(convolution_matrix(scale_function(OneDimensional.f_kernel,dx),
@@ -85,19 +86,24 @@ class OneDimensional:
             return convolve1d(self.get_sum(), weights=self.conv_matrix, mode='reflect')
         return sum(self.matrix)
     def show_patterns(self, ax=None, axis_off=True):
-        V = np.zeros(len(self.matrix[0, :]))
+        V = np.zeros(self.diameter_grid)
         for A in self.matrix:
             V += A
             ax.plot(V)
         ax.set_title(f'$t={self.time:.2f}$')
-        ax.set_axis_off()
-        return ax
+        if axis_off:
+            ax.set_axis_off()
+        return
     def get_sum(self):
         return np.array([sum([self.matrix[j, i] for j in range(self.divisions)])
                 for i in range(self.diameter_grid)])
-    def shift_left(self):
-        for row in self.matrix:
-            row = np.append(row[1:], 0)
+    def shift_left(self,k=1):
+        if k<0:
+            return
+        self.shifted += k
+        for i in range(self.divisions):
+            inter=self.matrix[i,k:]
+            self.matrix[i,:] = np.concatenate((inter, np.zeros(k)))
         return
     def update(self):
         t = self.time
@@ -112,6 +118,18 @@ class OneDimensional:
         W[:, -1] = W[:, -2]
         self.time += dt
         self.matrix = W
+
+    def recentre(self):
+        if self.centre:
+            sum=self.get_sum()
+            radius=self.diameter_grid//2
+            k=-radius
+            threshold=0.5*sum[0]
+            while k+radius<len(sum) and sum[k+radius]>threshold:
+                k+=1
+            if k>=0:
+                self.shift_left(k)
+        return
 
     def f(self, V,t=-1):
         if t==-1:
@@ -155,11 +173,11 @@ def main2(dx,dt,k, dirac,diameter_grid,iterations,fps=30,number_plots=30):
         U.update()
     plt.show()
 
-def main1(dx,dt,k, dirac,diameter_grid,iterations,fps=30,number_plots=30):
+def main1(dx,dt,k, dirac,diameter_grid,iterations,fps=30,number_plots=30,centre=True):
     #initial conditions
     interval = int(diameter_grid / 2 / k)
     step_plot = iterations // number_plots
-    U = OneDimensional(dx,dt,k=k, dirac=dirac, diameter_grid=diameter_grid)
+    U = OneDimensional(dx,dt,k=k, dirac=dirac, diameter_grid=diameter_grid,centre=centre)
     for i in range(k):
         U.matrix[i, :] = OneDimensional.initialise_heaviside(i * interval, (i + 1) * interval,
                                                              diameter_grid=diameter_grid)
@@ -167,11 +185,18 @@ def main1(dx,dt,k, dirac,diameter_grid,iterations,fps=30,number_plots=30):
     height, width = 480, 640  # Dimensions de la vidéo
     video = cv2.VideoWriter('video_collage.avi', cv2.VideoWriter_fourcc(*'DIVX'), fps, (width, height))
     #Letting DE evolve
+    times=np.zeros(0)
+    shifted=np.zeros(0)
     for i in range(iterations):
         if i % step_plot == 0:
             fig,ax= plt.subplots()
             U.show_patterns(ax=ax)
             ax.set_title(f'$t={i * dt:.2f}$')
+            #ax.xlabel('x-coordinate')
+            #ax.ylabel('height')
+            times=np.append(times,U.time)
+            shifted=np.append(shifted,U.shifted*dx)
+            U.recentre()
             canvas = FigureCanvas(fig)
             canvas.draw()
             img = np.frombuffer(canvas.tostring_rgb(), dtype='uint8')
@@ -179,16 +204,20 @@ def main1(dx,dt,k, dirac,diameter_grid,iterations,fps=30,number_plots=30):
             img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
             video.write(img)
             plt.close(fig)
-        if U.shift_wave is not None and i % U.shift_wave == 0:
-            U.shift_left()
         U.update()
     video.release()
     cv2.destroyAllWindows()
 
+    #Show a plot of the wave speed over time
+    plt.plot(times, shifted)
+    plt.xlabel('Time')
+    plt.ylabel('Shifted')
+    plt.title('Shifted vs Time')
+    plt.show()
 
 if __name__ == "__main__":
     #dimension, T, L, dx, dt, k, dirac = initialize_parameters()
-    dimension, T, L, dx, dt, k, dirac = 1, 20, 25, 0.1, 0.001, 10, 0
+    dimension, T, L, dx, dt, k, dirac = 1, 5, 25, 0.1, 0.001, 10, 0
     fps=30
     # scaling
     radius_init_scaled = int(radius_init / dx)
@@ -198,16 +227,11 @@ if __name__ == "__main__":
     diameter_grid = 2 * radius_grid + 1  # since it goes both positive and negative
     iterations = int(T / dt)  # number of iterations
 
-    # speed of wave
-    wave_speed = 2 * math.sqrt(mu)
-    # correct for inefficiencies
-    wave_speed *= 1
-
     # graphs
     number_plots = fps*T
     if dimension == 1:
         main1(dx=dx, dt=dt, k=k, dirac=dirac,diameter_grid=diameter_grid,iterations=
-              iterations,fps=fps,number_plots=number_plots)
+              iterations,fps=fps,number_plots=number_plots,centre=True)
     elif dimension == 2:
         main2()
 
@@ -225,7 +249,6 @@ class TwoDimensional:
         self.conv_matrix = TwoDimensional.initialise_convolution()
         if initial_condition is not None:
             self.matrix = initial_condition
-        self.shift_wave = None if wave_speed == 0.0 else int(dx / (dt*wave_speed))
     @staticmethod
     def initialise_convolution():
         return np.array(convolution_matrix(scale_function(TwoDimensional.f_kernel,dx),
