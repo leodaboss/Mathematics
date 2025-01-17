@@ -161,7 +161,7 @@ class OneDimensional:
 
 # Similar modifications can be made to the TwoDimensional class
 
-def main2(dx,dt,k, dirac,diameter_grid,iterations,fps=30,number_plots=30):
+def main2(dx,dt,k, dirac,diameter_grid,iterations,fps=30,number_plots=9):
     U = TwoDimensional(dx,dt,k=k, dirac=dirac, diameter_grid=diameter_grid)
     fig, axes = plt.subplots(3, 3, figsize=(8, 8))
     step_plot = iterations // number_plots
@@ -217,7 +217,7 @@ def main1(dx,dt,k, dirac,diameter_grid,iterations,fps=30,number_plots=30,centre=
 
 if __name__ == "__main__":
     #dimension, T, L, dx, dt, k, dirac = initialize_parameters()
-    dimension, T, L, dx, dt, k, dirac = 1, 5, 25, 0.1, 0.001, 10, 0
+    dimension, T, L, dx, dt, k, dirac = 1, 20, 25, 0.1, 0.001, 10, 0
     fps=30
     # scaling
     radius_init_scaled = int(radius_init / dx)
