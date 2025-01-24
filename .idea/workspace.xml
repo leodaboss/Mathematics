@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee051224-6144-4bc4-9a73-1a7691b30938" name="Changes" comment="amending">
-      <change afterPath="$PROJECT_DIR$/Probability models/Percolation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Undegrad stuff/click on video.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Random walk, dormancy/random walk dormancy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Traveling waves/simulatePDE.py" beforeDir="false" afterPath="$PROJECT_DIR$/Traveling waves/simulatePDE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Traveling waves/video_collage.avi" beforeDir="false" afterPath="$PROJECT_DIR$/Traveling waves/video_collage.avi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Undegrad stuff/EuclidAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Numerical analysis/EuclidAlgorithm.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +64,7 @@
     "Python.Percolation.executor": "Run",
     "Python.RootFinding.executor": "Run",
     "Python.discrete_logistic_growth.executor": "Run",
+    "Python.random walk dormancy.executor": "Run",
     "Python.random_darts_approximate_pi.executor": "Run",
     "Python.simulateDE.executor": "Run",
     "Python.simulatePDE.executor": "Run",
@@ -91,7 +88,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Percolation">
+  <component name="RunManager" selected="Python.random walk dormancy">
     <configuration name="Percolation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Mathematics" />
       <option name="ENV_FILES" value="" />
@@ -115,29 +112,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="RootFinding" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Mathematics" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Undegrad stuff/RootFinding.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="discrete_logistic_growth" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Mathematics" />
       <option name="ENV_FILES" value="" />
@@ -153,6 +127,29 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Undegrad stuff/discrete_logistic_growth.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="random walk dormancy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Mathematics" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Random walk, dormancy" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Random walk, dormancy/random walk dormancy.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -209,11 +206,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.random walk dormancy" />
         <item itemvalue="Python.Percolation" />
         <item itemvalue="Python.random_darts_approximate_pi" />
         <item itemvalue="Python.simulatePDE" />
         <item itemvalue="Python.discrete_logistic_growth" />
-        <item itemvalue="Python.RootFinding" />
       </list>
     </recent_temporary>
   </component>
@@ -235,6 +232,8 @@
       <updated>1643455322384</updated>
       <workItem from="1730730052123" duration="5669000" />
       <workItem from="1730905791014" duration="4761000" />
+      <workItem from="1737629348423" duration="1324000" />
+      <workItem from="1737733256119" duration="6940000" />
     </task>
     <task id="LOCAL-00001" summary="stuff">
       <created>1643551149268</created>
@@ -372,7 +371,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730738685269</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="amending">
+      <option name="closed" value="true" />
+      <created>1737136710216</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1737136710216</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -396,7 +403,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Mathematics$random_darts_approximate_pi.coverage" NAME="random_darts_approximate_pi Coverage Results" MODIFIED="1737133182678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Undegrad stuff" />
-    <SUITE FILE_PATH="coverage/Mathematics$Percolation.coverage" NAME="Percolation Coverage Results" MODIFIED="1737135624060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Probability models" />
+    <SUITE FILE_PATH="coverage/Mathematics$Percolation.coverage" NAME="Percolation Coverage Results" MODIFIED="1737630529483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Probability models" />
+    <SUITE FILE_PATH="coverage/Mathematics$random_walk_dormancy.coverage" NAME="random walk dormancy Coverage Results" MODIFIED="1737738600141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Random walk, dormancy" />
     <SUITE FILE_PATH="coverage/Mathematics$click_on_video.coverage" NAME="click on video Coverage Results" MODIFIED="1737130034380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Undegrad stuff" />
     <SUITE FILE_PATH="coverage/Mathematics$simulatePDE.coverage" NAME="simulatePDE Coverage Results" MODIFIED="1737133171407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Traveling waves" />
   </component>
