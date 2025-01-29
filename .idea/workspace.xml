@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee051224-6144-4bc4-9a73-1a7691b30938" name="Changes" comment="amending">
-      <change afterPath="$PROJECT_DIR$/Random walk, dormancy/random walk dormancy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_01_2025_16_57_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_01_2025_16_57_[Changes]/video_collage.avi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_01_2025_16_57__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Random walk, dormancy/random walk dormancy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Random walk, dormancy/random walk dormancy.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,25 +61,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Matrices.executor": "Run",
-    "Python.Percolation.executor": "Run",
-    "Python.RootFinding.executor": "Run",
-    "Python.discrete_logistic_growth.executor": "Run",
-    "Python.random walk dormancy.executor": "Run",
-    "Python.random_darts_approximate_pi.executor": "Run",
-    "Python.simulateDE.executor": "Run",
-    "Python.simulatePDE.executor": "Run",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Matrices.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Percolation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.RootFinding.executor&quot;: &quot;Run&quot;,
+    &quot;Python.discrete_logistic_growth.executor&quot;: &quot;Run&quot;,
+    &quot;Python.random walk dormancy.executor&quot;: &quot;Run&quot;,
+    &quot;Python.random_darts_approximate_pi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.simulateDE.executor&quot;: &quot;Run&quot;,
+    &quot;Python.simulatePDE.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\leoda\Google Drive\Documents\python\Github\Mathematics" />
@@ -233,7 +236,9 @@
       <workItem from="1730730052123" duration="5669000" />
       <workItem from="1730905791014" duration="4761000" />
       <workItem from="1737629348423" duration="1324000" />
-      <workItem from="1737733256119" duration="6940000" />
+      <workItem from="1737733256119" duration="8381000" />
+      <workItem from="1737969939882" duration="7046000" />
+      <workItem from="1738159646539" duration="3936000" />
     </task>
     <task id="LOCAL-00001" summary="stuff">
       <created>1643551149268</created>
@@ -379,7 +384,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737136710216</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="amending">
+      <option name="closed" value="true" />
+      <created>1737744235881</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1737744235881</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -404,7 +417,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Mathematics$random_darts_approximate_pi.coverage" NAME="random_darts_approximate_pi Coverage Results" MODIFIED="1737133182678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Undegrad stuff" />
     <SUITE FILE_PATH="coverage/Mathematics$Percolation.coverage" NAME="Percolation Coverage Results" MODIFIED="1737630529483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Probability models" />
-    <SUITE FILE_PATH="coverage/Mathematics$random_walk_dormancy.coverage" NAME="random walk dormancy Coverage Results" MODIFIED="1737738600141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Random walk, dormancy" />
+    <SUITE FILE_PATH="coverage/Mathematics$random_walk_dormancy.coverage" NAME="random walk dormancy Coverage Results" MODIFIED="1738167027451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Random walk, dormancy" />
     <SUITE FILE_PATH="coverage/Mathematics$click_on_video.coverage" NAME="click on video Coverage Results" MODIFIED="1737130034380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Undegrad stuff" />
     <SUITE FILE_PATH="coverage/Mathematics$simulatePDE.coverage" NAME="simulatePDE Coverage Results" MODIFIED="1737133171407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Traveling waves" />
   </component>
