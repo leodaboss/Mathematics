@@ -237,7 +237,7 @@
       <workItem from="1737733256119" duration="8381000" />
       <workItem from="1737969939882" duration="7046000" />
       <workItem from="1738159646539" duration="4380000" />
-      <workItem from="1738333635317" duration="6030000" />
+      <workItem from="1738333635317" duration="7802000" />
     </task>
     <task id="LOCAL-00001" summary="stuff">
       <created>1643551149268</created>
@@ -415,7 +415,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738333657586</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="amending">
+      <option name="closed" value="true" />
+      <created>1738343621571</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1738343621571</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -440,7 +448,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Mathematics$random_darts_approximate_pi.coverage" NAME="random_darts_approximate_pi Coverage Results" MODIFIED="1737133182678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Undegrad stuff" />
     <SUITE FILE_PATH="coverage/Mathematics$Percolation.coverage" NAME="Percolation Coverage Results" MODIFIED="1737630529483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Probability models" />
-    <SUITE FILE_PATH="coverage/Mathematics$random_walk_dormancy.coverage" NAME="random walk dormancy Coverage Results" MODIFIED="1738334082443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Random walk, dormancy" />
+    <SUITE FILE_PATH="coverage/Mathematics$random_walk_dormancy.coverage" NAME="random walk dormancy Coverage Results" MODIFIED="1738343965731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Random walk, dormancy" />
     <SUITE FILE_PATH="coverage/Mathematics$click_on_video.coverage" NAME="click on video Coverage Results" MODIFIED="1737130034380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Undegrad stuff" />
     <SUITE FILE_PATH="coverage/Mathematics$simulatePDE.coverage" NAME="simulatePDE Coverage Results" MODIFIED="1737133171407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Traveling waves" />
   </component>

@@ -71,12 +71,12 @@ def simulate_walk_hits(t_max, d, max_hits, x_0=None, a_0=0, x_1=None, a_1=1,s_1=
 
 def simulate_different_times(end_times,repetitions, d, x_0=None, a_0=0, x_1=None, a_1=1,s_1=1,s_0=1,kappa=1,rho=1):
     hits_different_times = np.zeros((len(end_times), repetitions))
-    total_iterations = len(end_times) * repetitions
+    total_iterations = sum(end_times) * repetitions
     with tqdm(total=total_iterations, desc="Progress") as pbar:
         for i in range(len(end_times)):
             for j in range(repetitions):
                 hits_different_times[i, j] = simulate_walk_end_time(end_times[i], d, x_0, a_0, x_1, a_1,s_1,s_0,kappa,rho)
-                pbar.update(1)
+                pbar.update(end_times[i])
     return hits_different_times
 def simulate_different_s_1(end_time,repetitions, d, x_0=None, a_0=0, x_1=None, a_1=1,s_1=np.ones(1),s_0=1,kappa=1,rho=1):
     hits_different_times = np.zeros((len(s_1), repetitions))
@@ -103,14 +103,14 @@ def __main__():
     max_time=100000
     repetitions = 500
     d = int(input("Veuillez entrer la dimension d: "))  # Demander à l'utilisateur la dimension
-    points = np.arange(0, 10.01, 0.1)
+    points = [1.5**i for i in range(1, 33)]
     y=np.zeros(len(points))
     z=np.zeros(len(points))
     start_time = time.time()  # Démarrer le chronomètre
-    hits_different_s_1=simulate_different_s_1(max_time, repetitions, d, [0] * d, 0, [0] * d,
-                                              1, points, 1, 1, 1)
-    y=np.mean(hits_different_s_1,axis=1)
-    z=np.mean(np.power(exponent, hits_different_s_1),axis=1)
+    hits_different_times=simulate_different_times(points, repetitions, d, [0] * d, 0, [0] * d,
+                                              1, s_1, s_0, kappa, rho)
+    y=np.mean(hits_different_times,axis=1)
+    z=np.mean(np.power(exponent, hits_different_times),axis=1)
     """print("En", d, "dimensions:")
     print("Pour le temps t=", max_time, ", le nombre attendu de hits de (0,0,1) est",
               np.mean(hits_different_times[:]), "avec un écart-type de", np.std(hits_different_times[:]))
