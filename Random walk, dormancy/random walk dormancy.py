@@ -78,6 +78,15 @@ def simulate_different_times(end_times,repetitions, d, x_0=None, a_0=0, x_1=None
                 hits_different_times[i, j] = simulate_walk_end_time(end_times[i], d, x_0, a_0, x_1, a_1,s_1,s_0,kappa,rho)
                 pbar.update(1)
     return hits_different_times
+def simulate_different_s_1(end_time,repetitions, d, x_0=None, a_0=0, x_1=None, a_1=1,s_1=np.ones(1),s_0=1,kappa=1,rho=1):
+    hits_different_times = np.zeros((len(s_1), repetitions))
+    total_iterations = len(s_1) * repetitions
+    with tqdm(total=total_iterations, desc="Progress") as pbar:
+        for i in range(len(s_1)):
+            for j in range(repetitions):
+                hits_different_times[i, j] = simulate_walk_end_time(end_time, d, x_0, a_0, x_1, a_1,s_1[i],s_0,kappa,rho)
+                pbar.update(1)
+    return hits_different_times
 def simulate_time(end_time,repetitions, d, x_0=None, a_0=0, x_1=None, a_1=1,s_1=1,s_0=1,kappa=1,rho=1):
     return simulate_different_times([end_time],repetitions, d, x_0, a_0, x_1, a_1,s_1, s_0, kappa, rho)[0,:]
 
@@ -87,27 +96,27 @@ def __main__():
     s_0 = 1
     kappa = 1
     rho = 1
-    gamma = 1
-    Lambda = -1
+    gamma = -1
+    Lambda = 1
     exponent = Lambda / (Lambda - gamma)
 
     max_time=100000
-    repetitions = 100
+    repetitions = 500
     d = int(input("Veuillez entrer la dimension d: "))  # Demander à l'utilisateur la dimension
     points = np.arange(0, 10.01, 0.1)
     y=np.zeros(len(points))
     z=np.zeros(len(points))
     start_time = time.time()  # Démarrer le chronomètre
-    for point in points:
-        hits_different_times = simulate_time(max_time, repetitions, d, [0] * d, 0, [0] * d, 1, point, s_0, kappa, rho)
-        y[int(point*10)]=np.mean(hits_different_times)
-        z[int(point*10)]=np.mean(np.power(exponent, hits_different_times))
-        """print("En", d, "dimensions:")
-        print("Pour le temps t=", max_time, ", le nombre attendu de hits de (0,0,1) est",
+    hits_different_s_1=simulate_different_s_1(max_time, repetitions, d, [0] * d, 0, [0] * d,
+                                              1, points, 1, 1, 1)
+    y=np.mean(hits_different_s_1,axis=1)
+    z=np.mean(np.power(exponent, hits_different_s_1),axis=1)
+    """print("En", d, "dimensions:")
+    print("Pour le temps t=", max_time, ", le nombre attendu de hits de (0,0,1) est",
               np.mean(hits_different_times[:]), "avec un écart-type de", np.std(hits_different_times[:]))
-        feynman_kac = np.power(exponent, hits_different_times)
-        print("En", d, "dimensions:")
-        print("Pour le temps t=", max_time, ", la formule de Feynman-Kac donne", np.mean(feynman_kac[:]),
+    feynman_kac = np.power(exponent, hits_different_times)
+    print("En", d, "dimensions:")
+    print("Pour le temps t=", max_time, ", la formule de Feynman-Kac donne", np.mean(feynman_kac[:]),
               "avec un écart-type de", np.std(feynman_kac[:]))"""
 
 
